@@ -2,7 +2,7 @@ django_zendesk provides single-sign on functionality between a django.contrib.au
 
 SETUP:
 
-django_zendesk needs to settings.py variables to be implemented:
+django_zendesk needs two settings.py variables to be implemented:
 
 ZENDESK_URL     = The URL of your support page, will either be on zendesk.com or your own domain (via a CNAME record)
 ZENDESK_TOKEN   = The authentication token token you receive from Zendesk when setting up remote authentication
@@ -17,6 +17,6 @@ Zendesk's documentation for remote authentication is here: http://www.zendesk.co
 
 CREDIT:
 
-Initial idea by Jon Gales <me@jongales.com> with improvements by Alexander Ljungberg.
+Initial idea by Jon Gales <me@jongales.com> with improvements by Alexander Ljungberg <aljungberg@wireload.net>.
 
 See initial idea/blog post here: http://www.jongales.com/blog/2009/05/12/zendesk-remote-authentication-with-django/

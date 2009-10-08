@@ -1,0 +1,1 @@
+# There is no model for this application but this file must exist for "manage.py test django_zendesk" to work.
