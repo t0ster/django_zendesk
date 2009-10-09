@@ -3,6 +3,7 @@
 
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.utils.http import urlquote
 import django.test
 from django.conf import settings
 
@@ -57,10 +58,11 @@ class ViewsTestCase(django.test.TestCase):
         
         u = User.objects.create_user('nikos', 'kazantzakis@example.com', password='secret')
         u.first_name = "Δεν ελπίζω τίποτε."
-        u.last_name = "Δεν φοβούμαι τίποτε. Είμαι λεύτερος."
+        u.last_name = "Δεν φοβούμαι τίποτε."
         u.save()
         
         self.client.login(username='nikos', password='secret')
         response = self.client.get(reverse(views.authorize), { 'timestamp': 100 }, follow=False)
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['Location'], r'http://example.com/access/remote/?name=%CE%94%CE%B5%CE%BD%20%CE%B5%CE%BB%CF%80%CE%AF%CE%B6%CF%89%20%CF%84%CE%AF%CF%80%CE%BF%CF%84%CE%B5.%20%CE%94%CE%B5%CE%BD%20%CF%86%CE%BF%CE%B2%CE%BF%CF%8D%CE%BC%CE%B1%CE%B9%20%CF%84%CE%AF%CF%80%CE%BF%CF%84%CE%B5.%20%CE%95%CE%AF%CE%BC%CE%B1%CE%B9%20%CE%BB%CE%B5%CF%8D%CF%84%CE%B5%CF%81%CE%BF%CF%82.&email=kazantzakis%40example.com&timestamp=100&hash=716ce442f7d093aa30bae0c1f4b4c0ef')
+        name = urlquote("%s %s" % (u.first_name, u.last_name))
+        self.assertEqual(response['Location'], r'%s/access/remote/?name=%s&email=%s&timestamp=100&hash=00d5e1de5c8a20b2d4aeb23c7eb07fe1' % (settings.ZENDESK_URL, name, urlquote(u.email)))
