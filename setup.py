@@ -1,8 +1,7 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name = 'django_zendesk',
-    package_dir = {'django_zendesk': ''},
-    packages = ["django_zendesk"],
+    packages = find_packages(),
     zip_safe = False,
 )
