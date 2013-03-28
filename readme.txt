@@ -1,4 +1,5 @@
-django_zendesk provides single-sign on functionality between a django.contrib.auth based site and Zendesk. Other authentication systems are compatible as long as they implement the @login_required decorator. 
+django_zendesk provides single-sign on functionality between a django.contrib.auth based site and Zendesk. Other authentication systems are compatible as long as they implement the @login_required decorator.   This differs from the other implementations in
+that it exposes out company, external_id, tags, etc.
 
 SETUP:
 
