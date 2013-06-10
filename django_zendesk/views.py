@@ -1,4 +1,9 @@
+import base64
 from collections import OrderedDict
+import hashlib
+import hmac
+import json
+import uuid
 from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
@@ -7,6 +12,8 @@ from django.utils.encoding import iri_to_uri
 from django.utils.http import urlquote
 
 from hashlib import md5
+import time
+
 
 @never_cache
 @login_required
@@ -61,3 +68,63 @@ def authorize(request):
         url += u"&remote_photo_url={}".format(urlquote(data['remote_photo_url']))
 
     return HttpResponseRedirect(iri_to_uri(url))
+
+# ----- New JWT Based Authentication
+
+signing_methods = {
+    'HS256': lambda msg, key: hmac.new(key, msg, hashlib.sha256).digest(),
+    'HS384': lambda msg, key: hmac.new(key, msg, hashlib.sha384).digest(),
+    'HS512': lambda msg, key: hmac.new(key, msg, hashlib.sha512).digest(),
+}
+
+def base64url_encode(input):
+    return base64.urlsafe_b64encode(input).replace('=', '')
+
+
+def jwt_encode(payload, key, algorithm='HS256'):
+    segments = []
+    header = {"typ": "JWT", "alg": algorithm}
+    segments.append(base64url_encode(json.dumps(header)))
+    segments.append(base64url_encode(json.dumps(payload)))
+    signing_input = '.'.join(segments)
+    try:
+        if isinstance(key, unicode):
+            key = key.encode('utf-8')
+        signature = signing_methods[algorithm](signing_input, key)
+    except KeyError:
+        raise NotImplementedError("Algorithm not supported")
+    segments.append(base64url_encode(signature))
+    return '.'.join(segments)
+
+
+def authorize_jwt(request):
+
+    user = request.user
+    data = OrderedDict()
+    data['iat'] = int(time.time())
+    data['jti'] = str(uuid.uuid1())
+    data['name'] = user.get_full_name()
+    data['email'] = user.email
+    data['external_id'] = str(user.id)
+    data['organization'] = u""
+    data['tags'] = u""
+    data['remote_photo_url'] = u""
+
+    tags = []
+    if user.userprofile.company:
+        data['organization'] = user.userprofile.company.name
+        tags.append(user.userprofile.company.company_type.capitalize())
+        if user.userprofile.company.sponsors.count():
+            tags.append("sponsored")
+            for company in user.userprofile.company.sponsors.all():
+                tags.append(company.slug)
+        if user.userprofile.is_company_admin:
+            tags.append("company_admin")
+        if user.userprofile.company.is_customer:
+            tags.append("customer")
+    if len(tags):
+        data['tags'] = ",".join(tags)
+
+    jwt_string = jwt_encode(data, settings.ZENDESK_SHARED_KEY)
+    return_url = "https://" + settings.ZENDESK_URL + ".zendesk.com/access/jwt?jwt=" + jwt_string
+    return HttpResponseRedirect(return_url)
