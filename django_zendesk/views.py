@@ -14,7 +14,6 @@ from django.utils.http import urlquote
 from hashlib import md5
 import time
 
-
 @never_cache
 @login_required
 def authorize(request):
