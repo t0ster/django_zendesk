@@ -97,6 +97,8 @@ def jwt_encode(payload, key, algorithm='HS256'):
     return '.'.join(segments)
 
 
+@never_cache
+@login_required
 def authorize_jwt(request):
 
     user = request.user
@@ -105,7 +107,7 @@ def authorize_jwt(request):
     data['jti'] = str(uuid.uuid1())
     data['name'] = user.get_full_name()
     data['email'] = user.email
-    data['external_id'] = str(user.id)
+    data['external_id'] = int(user.id)
     data['organization'] = u""
     data['tags'] = u""
     data['remote_photo_url'] = u""
@@ -115,15 +117,15 @@ def authorize_jwt(request):
         data['organization'] = user.userprofile.company.name
         tags.append(user.userprofile.company.company_type.capitalize())
         if user.userprofile.company.sponsors.count():
-            tags.append("sponsored")
+            tags.append(u"sponsored")
             for company in user.userprofile.company.sponsors.all():
                 tags.append(company.slug)
         if user.userprofile.is_company_admin:
-            tags.append("company_admin")
+            tags.append(u"company_admin")
         if user.userprofile.company.is_customer:
-            tags.append("customer")
+            tags.append(u"customer")
     if len(tags):
-        data['tags'] = ",".join(tags)
+        data['tags'] = tags
 
     jwt_string = jwt_encode(data, settings.ZENDESK_SHARED_KEY)
     return_url = "https://" + settings.ZENDESK_URL + ".zendesk.com/access/jwt?jwt=" + jwt_string
