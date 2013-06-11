@@ -127,5 +127,5 @@ def authorize_jwt(request):
         data['tags'] = tags
 
     jwt_string = jwt_encode(data, settings.ZENDESK_SHARED_KEY)
-    return_url = "https://" + settings.ZENDESK_URL + ".zendesk.com/access/jwt?jwt=" + jwt_string
+    return_url = "https://" + settings.ZENDESK_SUBDOMAIN + ".zendesk.com/access/jwt?jwt=" + jwt_string
     return HttpResponseRedirect(return_url)
