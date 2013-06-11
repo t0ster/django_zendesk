@@ -128,4 +128,6 @@ def authorize_jwt(request):
 
     jwt_string = jwt_encode(data, settings.ZENDESK_SHARED_KEY)
     return_url = "https://" + settings.ZENDESK_SUBDOMAIN + ".zendesk.com/access/jwt?jwt=" + jwt_string
+    if request.GET.get("return_to"):
+        return_url += "&return_to={}".format(request.GET.get("return_to"))
     return HttpResponseRedirect(return_url)
