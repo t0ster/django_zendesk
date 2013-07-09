@@ -13,6 +13,8 @@ from django.utils.http import urlquote
 
 from hashlib import md5
 import time
+from apps.company.models import COMPANY_TYPES
+
 
 @never_cache
 @login_required
@@ -38,16 +40,23 @@ def authorize(request):
 
     tags = []
     if user.userprofile.company:
-        data['organization'] = user.userprofile.company.name
-        tags.append(user.userprofile.company.company_type.capitalize())
+        data['organization'] = user.userprofile.company.slug
+        tags.append(user.userprofile.company.company_type)
+        tags.append("view_{}".format(user.userprofile.company.company_type))
+        if user.userprofile.company.is_eep_sponsor:
+            tags.append("is_sponsor")
+            for company_type in dict(COMPANY_TYPES).keys():
+                if 'view_{}organization'.format(company_type) in user.get_all_permissions():
+                    tags.append('view_{}organization'.format(company_type))
         if user.userprofile.company.sponsors.count():
             tags.append("sponsored")
             for company in user.userprofile.company.sponsors.all():
-                tags.append(company.slug)
+                tags.append("sponsor_{}".format(company.slug))
         if user.userprofile.is_company_admin:
             tags.append("company_admin")
         if user.userprofile.company.is_customer:
             tags.append("customer")
+
     if len(tags):
         data['tags'] = ",".join(tags)
 
