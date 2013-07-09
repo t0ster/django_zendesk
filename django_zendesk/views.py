@@ -16,6 +16,30 @@ import time
 from apps.company.models import COMPANY_TYPES
 
 
+def get_tags(user):
+    """Get a list of tags for a user"""
+    tags = []
+    if user.userprofile.is_company_admin:
+        tags.append("company_admin")
+    if user.userprofile.company:
+        tags.append(user.userprofile.company.slug)
+        tags.append(user.userprofile.company.company_type)
+        tags.append("view_{}".format(user.userprofile.company.company_type))
+        if user.userprofile.company.is_eep_sponsor:
+            tags.append("is_sponsor")
+            for company_type in dict(COMPANY_TYPES).keys():
+                if 'company.view_{}organization'.format(company_type) in user.get_all_permissions():
+                    tags.append('view_{}organization'.format(company_type))
+        if user.userprofile.company.sponsors.count():
+            tags.append("sponsored")
+            for company in user.userprofile.company.sponsors.all():
+                tags.append("sponsor_{}".format(company.slug))
+        if user.userprofile.company.is_customer:
+            tags.append("customer")
+    return tags
+
+
+
 @never_cache
 @login_required
 def authorize(request):
@@ -38,24 +62,9 @@ def authorize(request):
     data['token'] = settings.ZENDESK_TOKEN
     data['timestamp'] = timestamp
 
-    tags = []
+    tags = get_tags(user)
     if user.userprofile.company:
-        data['organization'] = user.userprofile.company.slug
-        tags.append(user.userprofile.company.company_type)
-        tags.append("view_{}".format(user.userprofile.company.company_type))
-        if user.userprofile.company.is_eep_sponsor:
-            tags.append("is_sponsor")
-            for company_type in dict(COMPANY_TYPES).keys():
-                if 'view_{}organization'.format(company_type) in user.get_all_permissions():
-                    tags.append('view_{}organization'.format(company_type))
-        if user.userprofile.company.sponsors.count():
-            tags.append("sponsored")
-            for company in user.userprofile.company.sponsors.all():
-                tags.append("sponsor_{}".format(company.slug))
-        if user.userprofile.is_company_admin:
-            tags.append("company_admin")
-        if user.userprofile.company.is_customer:
-            tags.append("customer")
+        data['organization'] = user.userprofile.company.name
 
     if len(tags):
         data['tags'] = ",".join(tags)
