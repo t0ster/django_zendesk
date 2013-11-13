@@ -25,15 +25,19 @@ def get_tags(user):
         tags.append(user.userprofile.company.slug)
         tags.append(user.userprofile.company.company_type)
         tags.append("view_{}".format(user.userprofile.company.company_type))
+        if user.userprofile.company.company_type == "provider":
+            tags.append("view_{}".format("rater"))
         if user.userprofile.company.is_eep_sponsor:
             tags.append("is_sponsor")
             for company_type in dict(COMPANY_TYPES).keys():
                 if 'company.view_{}organization'.format(company_type) in user.get_all_permissions():
-                    tags.append('view_{}organization'.format(company_type))
+                    tags.append('sponsor_{}_{}'.format(user.userprofile.company.slug,  company_type))
         if user.userprofile.company.sponsors.count():
             tags.append("sponsored")
             for company in user.userprofile.company.sponsors.all():
-                tags.append("sponsor_{}".format(company.slug))
+                tags.append('sponsor_{}_{}'.format(company.slug, user.userprofile.company.company_type))
+                if user.userprofile.company.company_type == "provider":
+                    tags.append('sponsor_{}_{}'.format(company.slug, "rater"))
         if user.userprofile.company.is_customer:
             tags.append("customer")
     return tags
