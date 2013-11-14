@@ -138,18 +138,10 @@ def authorize_jwt(request):
     data['tags'] = u""
     data['remote_photo_url'] = u""
 
-    tags = []
     if profile.company:
         data['organization'] = profile.company.name
-        tags.append(profile.company.company_type.capitalize())
-        if profile.company.sponsors.count():
-            tags.append(u"sponsored")
-            for company in profile.company.sponsors.all():
-                tags.append(company.slug)
-        if profile.is_company_admin:
-            tags.append(u"company_admin")
-        if profile.company.is_customer:
-            tags.append(u"customer")
+
+    tags = get_tags(user)
     if len(tags):
         data['tags'] = tags
 
