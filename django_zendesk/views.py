@@ -14,6 +14,7 @@ from django.utils.http import urlquote
 from hashlib import md5
 import time
 from apps.company.models import COMPANY_TYPES
+from apps.core.models import UserProfile
 
 
 def get_tags(user):
