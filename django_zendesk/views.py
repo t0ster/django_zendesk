@@ -19,26 +19,27 @@ from apps.company.models import COMPANY_TYPES
 def get_tags(user):
     """Get a list of tags for a user"""
     tags = []
-    if user.userprofile.is_company_admin:
+    profile = UserProfile.objects.get(user=user)
+    if profile.is_company_admin:
         tags.append("company_admin")
-    if user.userprofile.company:
-        tags.append(user.userprofile.company.slug)
-        tags.append(user.userprofile.company.company_type)
-        tags.append("view_{}".format(user.userprofile.company.company_type))
-        if user.userprofile.company.company_type == "provider":
+    if profile.company:
+        tags.append(profile.company.slug)
+        tags.append(profile.company.company_type)
+        tags.append("view_{}".format(profile.company.company_type))
+        if profile.company.company_type == "provider":
             tags.append("view_{}".format("rater"))
-        if user.userprofile.company.is_eep_sponsor:
+        if profile.company.is_eep_sponsor:
             tags.append("is_sponsor")
             for company_type in dict(COMPANY_TYPES).keys():
                 if 'company.view_{}organization'.format(company_type) in user.get_all_permissions():
-                    tags.append('sponsor_{}_{}'.format(user.userprofile.company.slug,  company_type))
-        if user.userprofile.company.sponsors.count():
+                    tags.append('sponsor_{}_{}'.format(profile.company.slug,  company_type))
+        if profile.company.sponsors.count():
             tags.append("sponsored")
-            for company in user.userprofile.company.sponsors.all():
-                tags.append('sponsor_{}_{}'.format(company.slug, user.userprofile.company.company_type))
-                if user.userprofile.company.company_type == "provider":
+            for company in profile.company.sponsors.all():
+                tags.append('sponsor_{}_{}'.format(company.slug, profile.company.company_type))
+                if profile.company.company_type == "provider":
                     tags.append('sponsor_{}_{}'.format(company.slug, "rater"))
-        if user.userprofile.company.is_customer:
+        if profile.company.is_customer:
             tags.append("customer")
     return tags
 
@@ -55,6 +56,7 @@ def authorize(request):
         raise Http404
 
     user = request.user
+    profile = UserProfile.objects.get(user=user)
 
     data = OrderedDict()
     data['name'] = user.get_full_name()
@@ -67,8 +69,8 @@ def authorize(request):
     data['timestamp'] = timestamp
 
     tags = get_tags(user)
-    if user.userprofile.company:
-        data['organization'] = user.userprofile.company.name
+    if profile.company:
+        data['organization'] = profile.company.name
 
     if len(tags):
         data['tags'] = ",".join(tags)
@@ -81,7 +83,7 @@ def authorize(request):
     url += u"&email={}&timestamp={}".format(urlquote(data['email']), timestamp)
     url += u"&hash={}&external_id={}".format(hash, data['external_id'])
 
-    if user.userprofile.company:
+    if profile.company:
         url += u"&organization={}".format(urlquote(data['organization']))
     if data['tags'] != u"":
         url += u"&tags={}".format(urlquote(data['tags']))
@@ -123,6 +125,8 @@ def jwt_encode(payload, key, algorithm='HS256'):
 def authorize_jwt(request):
 
     user = request.user
+    profile = UserProfile.objects.get(user=user)
+
     data = OrderedDict()
     data['iat'] = int(time.time())
     data['jti'] = str(uuid.uuid1())
@@ -134,16 +138,16 @@ def authorize_jwt(request):
     data['remote_photo_url'] = u""
 
     tags = []
-    if user.userprofile.company:
-        data['organization'] = user.userprofile.company.name
-        tags.append(user.userprofile.company.company_type.capitalize())
-        if user.userprofile.company.sponsors.count():
+    if profile.company:
+        data['organization'] = profile.company.name
+        tags.append(profile.company.company_type.capitalize())
+        if profile.company.sponsors.count():
             tags.append(u"sponsored")
-            for company in user.userprofile.company.sponsors.all():
+            for company in profile.company.sponsors.all():
                 tags.append(company.slug)
-        if user.userprofile.is_company_admin:
+        if profile.is_company_admin:
             tags.append(u"company_admin")
-        if user.userprofile.company.is_customer:
+        if profile.company.is_customer:
             tags.append(u"customer")
     if len(tags):
         data['tags'] = tags
