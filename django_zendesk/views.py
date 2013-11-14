@@ -31,12 +31,14 @@ def get_tags(user):
             tags.append("view_{}".format("rater"))
         if profile.company.is_eep_sponsor:
             tags.append("is_sponsor")
+            tags.append("sponsor_{}".format(profile.company.slug))
             for company_type in dict(COMPANY_TYPES).keys():
                 if 'company.view_{}organization'.format(company_type) in user.get_all_permissions():
                     tags.append('sponsor_{}_{}'.format(profile.company.slug,  company_type))
         if profile.company.sponsors.count():
             tags.append("sponsored")
             for company in profile.company.sponsors.all():
+                tags.append("sponsor_{}".format(company.slug))
                 tags.append('sponsor_{}_{}'.format(company.slug, profile.company.company_type))
                 if profile.company.company_type == "provider":
                     tags.append('sponsor_{}_{}'.format(company.slug, "rater"))
