@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+"""views.py: django zendesk"""
+
+from __future__ import unicode_literals
+
 import base64
 from collections import OrderedDict
 import hashlib
@@ -65,9 +70,9 @@ def authorize(request):
     data['name'] = user.get_full_name()
     data['email'] = user.email
     data['external_id'] = str(user.id)
-    data['organization'] = u""
-    data['tags'] = u""
-    data['remote_photo_url'] = u""
+    data['organization'] = ""
+    data['tags'] = ""
+    data['remote_photo_url'] = ""
     data['token'] = settings.ZENDESK_TOKEN
     data['timestamp'] = timestamp
 
@@ -82,16 +87,16 @@ def authorize(request):
     hash = md5(hash_str).hexdigest()
 
     # Build our URL..
-    url = u"{}/access/remoteauth/?name={}".format(settings.ZENDESK_URL, urlquote(data['name']))
-    url += u"&email={}&timestamp={}".format(urlquote(data['email']), timestamp)
-    url += u"&hash={}&external_id={}".format(hash, data['external_id'])
+    url = "{}/access/remoteauth/?name={}".format(settings.ZENDESK_URL, urlquote(data['name']))
+    url += "&email={}&timestamp={}".format(urlquote(data['email']), timestamp)
+    url += "&hash={}&external_id={}".format(hash, data['external_id'])
 
     if profile.company:
-        url += u"&organization={}".format(urlquote(data['organization']))
-    if data['tags'] != u"":
-        url += u"&tags={}".format(urlquote(data['tags']))
-    if data['remote_photo_url'] != u"":
-        url += u"&remote_photo_url={}".format(urlquote(data['remote_photo_url']))
+        url += "&organization={}".format(urlquote(data['organization']))
+    if data['tags'] != "":
+        url += "&tags={}".format(urlquote(data['tags']))
+    if data['remote_photo_url'] != "":
+        url += "&remote_photo_url={}".format(urlquote(data['remote_photo_url']))
 
     return HttpResponseRedirect(iri_to_uri(url))
 
@@ -136,9 +141,9 @@ def authorize_jwt(request):
     data['name'] = user.get_full_name()
     data['email'] = user.email
     data['external_id'] = int(user.id)
-    data['organization'] = u""
-    data['tags'] = u""
-    data['remote_photo_url'] = u""
+    data['organization'] = ""
+    data['tags'] = ""
+    data['remote_photo_url'] = ""
 
     if profile.company:
         data['organization'] = profile.company.name
