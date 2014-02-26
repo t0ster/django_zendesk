@@ -18,35 +18,50 @@ from django.views.decorators.cache import never_cache
 from django.conf import settings
 from django.utils.encoding import iri_to_uri
 from django.utils.http import urlquote
+from django.conf import settings
 
 from apps.company.models import COMPANY_TYPES
 
 
+# TODO: REMOVE ME
+IS_LEGACY = settings.AUTH_USER_MODEL == 'auth.User'
+
+
+if IS_LEGACY:
+    from apps.core.models import UserProfile
+
 def get_tags(user):
     """Get a list of tags for a user"""
+    if IS_LEGACY:
+        profile = UserProfile.objects.get(user=user)
+        company = profile.company
+        extra_fields = profile
+    else:
+        company = user.company
+        extra_fields = user
     tags = []
-    if user.is_company_admin:
+    if extra_fields.is_company_admin:
         tags.append("company_admin")
-    if user.company:
-        tags.append(user.company.slug)
-        tags.append(user.company.company_type)
-        tags.append("view_{}".format(user.company.company_type))
-        if user.company.company_type == "provider":
+    if company:
+        tags.append(company.slug)
+        tags.append(company.company_type)
+        tags.append("view_{}".format(company.company_type))
+        if company.company_type == "provider":
             tags.append("view_{}".format("rater"))
-        if user.company.is_eep_sponsor:
+        if company.is_eep_sponsor:
             tags.append("is_sponsor")
-            tags.append("sponsor_{}".format(user.company.slug))
+            tags.append("sponsor_{}".format(company.slug))
             for company_type in dict(COMPANY_TYPES).keys():
                 if 'company.view_{}organization'.format(company_type) in user.get_all_permissions():
-                    tags.append('sponsor_{}_{}'.format(user.company.slug,  company_type))
-        if user.company.sponsors.count():
+                    tags.append('sponsor_{}_{}'.format(company.slug,  company_type))
+        if company.sponsors.count():
             tags.append("sponsored")
-            for company in user.company.sponsors.all():
-                tags.append("sponsor_{}".format(company.slug))
-                tags.append('sponsor_{}_{}'.format(company.slug, user.company.company_type))
-                if user.company.company_type == "provider":
-                    tags.append('sponsor_{}_{}'.format(company.slug, "rater"))
-        if user.company.is_customer:
+            for sponsor in company.sponsors.all():
+                tags.append("sponsor_{}".format(sponsor.slug))
+                tags.append('sponsor_{}_{}'.format(sponsor.slug, company.company_type))
+                if company.company_type == "provider":
+                    tags.append('sponsor_{}_{}'.format(sponsor.slug, "rater"))
+        if company.is_customer:
             tags.append("customer")
     return tags
 
@@ -63,6 +78,11 @@ def authorize(request):
         raise Http404
 
     user = request.user
+    if IS_LEGACY:
+        profile = UserProfile.objects.get(user=user)
+        company = profile.company
+    else:
+        company = user.company
 
     data = OrderedDict()
     data['name'] = user.get_full_name()
@@ -75,8 +95,8 @@ def authorize(request):
     data['timestamp'] = timestamp
 
     tags = get_tags(user)
-    if user.company:
-        data['organization'] = user.company.name
+    if company:
+        data['organization'] = company.name
 
     if len(tags):
         data['tags'] = ",".join(tags)
@@ -89,7 +109,7 @@ def authorize(request):
     url += "&email={}&timestamp={}".format(urlquote(data['email']), timestamp)
     url += "&hash={}&external_id={}".format(hash, data['external_id'])
 
-    if user.company:
+    if company:
         url += "&organization={}".format(urlquote(data['organization']))
     if data['tags'] != "":
         url += "&tags={}".format(urlquote(data['tags']))
@@ -131,6 +151,11 @@ def jwt_encode(payload, key, algorithm='HS256'):
 def authorize_jwt(request):
 
     user = request.user
+    if IS_LEGACY:
+        profile = UserProfile.objects.get(user=user)
+        company = profile.company
+    else:
+        company = user.company
 
     data = OrderedDict()
     data['iat'] = int(time.time())
@@ -142,8 +167,8 @@ def authorize_jwt(request):
     data['tags'] = ""
     data['remote_photo_url'] = ""
 
-    if user.company:
-        data['organization'] = user.company.name
+    if company:
+        data['organization'] = company.name
 
     tags = get_tags(user)
     if len(tags):
