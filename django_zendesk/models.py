@@ -63,8 +63,8 @@ class Zendesk(object):
             url, data=json.dumps(data),  auth=(self.agent_user, self.agent_password),
             headers={'content-type': 'application/json'})
 
-        if response.status_code == 201:
-            data = json.loads(response.text)['request']
+        if response.status_code == 200:
+            data = json.loads(response.text)
             log.debug("Added comment to ticket {id} ".format(id=ticket_id))
             return data
         else:
