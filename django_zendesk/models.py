@@ -50,8 +50,9 @@ class Zendesk(object):
             log.debug("Created {status} ticket {id} - {subject}".format(**data))
             return data
         else:
-            raise IOError("Did not get a good response {} for creating ticket "
-                          "'{}'".format(response.status_code, subject))
+            message = "Zendesk invalid response on create ticket %s - %s"
+            log.error(message, response.status_code, data)
+            raise IOError(message, response.status_code, data)
 
     def add_admin_comment(self, ticket_id, comment, public=True):
 
@@ -68,6 +69,7 @@ class Zendesk(object):
             log.debug("Added comment to ticket {id} ".format(id=ticket_id))
             return data
         else:
-            raise IOError("Did not get a good response {} for updating a comment to ticket "
-                          "{}".format(response.status_code, ticket_id))
+            message = "Zendesk invalid response on admin comment [%s] for ticket %s - %s"
+            log.error(message, response.status_code, ticket_id, data)
+            raise IOError(message, response.status_code, ticket_id, data)
 
