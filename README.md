@@ -39,7 +39,7 @@ See initial idea/blog post [here][intial_idea] and [here][idea2]
 
 ### Build Process:
 1.  Update the `__version_info__` inside of the application. Commit and push.
-2.  Tag the release with the version. `git tag <__version__> -m "Release"; git push --tags`
+2.  Tag the release with the version. `git tag <pypi package>-<version> -m "Release"; git push --tags`
 3.  Build the release `rm -rf dist build *egg-info; python setup.py sdist bdist_wheel`
 4.  Upload the data `twine upload dist/*`
 
