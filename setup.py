@@ -11,9 +11,12 @@ from setuptools import setup, find_packages
 from codecs import open
 from os import path
 
-from django_zendesk import __version__
-
 here = path.abspath(path.dirname(__file__))
+
+from django_zendesk import __version__, __name__
+
+name = 'pivotal_' + __name__
+base_url = 'https://github.com/pivotal-energy-solutions/django_zendesk'
 
 # Get the long description from the README file
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
@@ -34,7 +37,7 @@ setup(
     # There are some restrictions on what makes a valid project name
     # specification here:
     # https://packaging.python.org/specifications/core-metadata/#name
-    name='pivotal_django_zendesk',  # Required
+    name=name,  # Required
 
     # Versions should comply with PEP 440:
     # https://www.python.org/dev/peps/pep-0440/
@@ -75,7 +78,9 @@ setup(
     #
     # This field corresponds to the "Home-Page" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#home-page-optional
-    url='https://github.com/pivotal-energy-solutions/django_zendesk',  # Optional
+    url=base_url,  # Optional
+
+    download_url='{0}/archive/{1}-{1}.tar.gz'.format(base_url, name, __version__),
 
     # This should be your name or the name of the organization which owns the
     # project.
@@ -190,7 +195,7 @@ setup(
     # maintainers, and where to support the project financially. The key is
     # what's used to render the link text on PyPI.
     project_urls={  # Optional
-        'Bug Reports': 'https://github.com/pivotal-energy-solutions/django_zendesk/issues',
+        'Bug Reports': '{}/issues'.format(base_url),
         'Say Thanks!': 'https://saythanks.io/to/rh0dium',
         'Source': 'https://bitbucket.org/jonknee/django_zendesk',
     },

@@ -39,12 +39,9 @@ See initial idea/blog post [here][intial_idea] and [here][idea2]
 
 ### Build Process:
 1.  Update the `__version_info__` inside of the application. Commit and push.
-2.  Tag the release with the version. `git tag <__version__> -m "Release"`
+2.  Tag the release with the version. `git tag <__version__> -m "Release"; git push --tags`
 3.  Build the release `rm -rf dist build *egg-info; python setup.py sdist bdist_wheel`
-4.  Upload the data `twine upload --repository-url https://test.pypi.org/legacy/ sdist/* dist/*`
-5.  Verify `pip install -i https://testpypi.python.org/pypi <package>`
-6.  Official Release `twine upload sdist/* dist/*`
-
+4.  Upload the data `twine upload dist/*`
 
 
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/rh0dium)
