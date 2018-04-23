@@ -1,10 +1,18 @@
 # Django Zendesk
 
+![Downloads](https://img.shields.io/pypi/dm/pivotal-django-zendesk.svg?style=flat)
+![Python Versions](https://img.shields.io/pypi/pyversions/pivotal-django-zendesk.svg?style=flat)
+![License](https://img.shields.io/pypi/l/pivotal-django-zendesk.svg?version=latest)
+
 django_zendesk provides single-sign on functionality between a
 django.contrib.auth based site and Zendesk. Other authentication
 systems are compatible as long as they implement the
 `@login_required` decorator.   This differs from the other
 implementations in that it exposes out company, external_id, tags, etc.
+
+####  Note:
+_This fork provides for changes specifically for Pivotal Energy Solutions_
+
 
 ## SETUP
 
