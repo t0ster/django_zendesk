@@ -80,7 +80,7 @@ setup(
     # https://packaging.python.org/specifications/core-metadata/#home-page-optional
     url=base_url,  # Optional
 
-    download_url='{0}/archive/{1}-{2}.tar.gz'.format(base_url, name, __version__),
+    download_url='{0}/archive/{1}.tar.gz'.format(base_url, __version__),
 
     # This should be your name or the name of the organization which owns the
     # project.
@@ -99,23 +99,23 @@ setup(
         #   3 - Alpha
         #   4 - Beta
         #   5 - Production/Stable
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 5 - Production/Stable',
 
         # Indicate who your project is intended for
-        'Intended Audience :: Developers',
-        'Topic :: Software Development :: Build Tools',
+        'Environment :: Web Environment',
+        'Framework :: Django',
 
         # Pick your license as you wish
-        'License :: OSI Approved :: MIT License',
+        'License :: OSI Approved :: Apache Software License',
 
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
+
+        'Topic :: Internet :: WWW/HTTP',
+        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+        'Topic :: Software Development :: Libraries :: Python Modules',
     ],
 
     # This field adds keywords for your project which will appear on the
