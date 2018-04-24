@@ -13,7 +13,7 @@ from os import path
 
 here = path.abspath(path.dirname(__file__))
 
-from django_zendesk import __version__, __name__
+from django_zendesk import __version__, __name__, __author__
 
 name = 'pivotal_' + __name__
 base_url = 'https://github.com/pivotal-energy-solutions/django_zendesk'
@@ -84,7 +84,7 @@ setup(
 
     # This should be your name or the name of the organization which owns the
     # project.
-    author='Pivotal Energy Solutions',  # Optional
+    author=__author__,  # Optional
 
     # This should be a valid email address corresponding to the author listed
     # above.
