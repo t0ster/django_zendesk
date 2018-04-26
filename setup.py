@@ -141,7 +141,7 @@ setup(
     #
     # For an analysis of "install_requires" vs pip's requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['django'],  # Optional
+    install_requires=['django>=1.7,<1.9'],  # Optional
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). Users will be able to install these using the "extras"
@@ -197,6 +197,6 @@ setup(
     project_urls={  # Optional
         'Bug Reports': '{}/issues'.format(base_url),
         'Say Thanks!': 'https://saythanks.io/to/rh0dium',
-        'Source': 'https://bitbucket.org/jonknee/django_zendesk',
+        'Original Source': 'https://bitbucket.org/jonknee/django_zendesk',
     },
 )
