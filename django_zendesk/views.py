@@ -15,12 +15,15 @@ import time
 from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
-from django.conf import settings
+
 from django.utils.encoding import iri_to_uri
 from django.utils.http import urlquote
 from django.conf import settings
 
-from apps.company.models import COMPANY_TYPES
+try:
+    from axis.company.models import COMPANY_TYPES
+except:
+    from apps.company.models import COMPANY_TYPES
 
 
 # TODO: REMOVE ME
@@ -28,7 +31,11 @@ IS_LEGACY = settings.AUTH_USER_MODEL == 'auth.User'
 
 
 if IS_LEGACY:
-    from apps.core.models import UserProfile
+    try:
+        from axis.core.models import UserProfile
+    except:
+        from apps.core.models import UserProfile
+
 
 def get_tags(user):
     """Get a list of tags for a user"""
