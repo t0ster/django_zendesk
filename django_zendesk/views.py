@@ -136,15 +136,14 @@ signing_methods = {
 def base64url_encode(input):
     if isinstance(input, str):
         input = input.encode('utf-8')
-    return base64.urlsafe_b64encode(input).replace('=', '')
+    return base64.urlsafe_b64encode(input).decode('utf-8').replace('=', '')
 
 
 def jwt_encode(payload, key, algorithm='HS256'):
     segments = []
     header = {"typ": "JWT", "alg": algorithm}
-
-    segments.append(base64url_encode(json.dumps(header)).decode('utf-8'))
-    segments.append(base64url_encode(json.dumps(payload)).decode('utf-8'))
+    segments.append(base64url_encode(json.dumps(header)))
+    segments.append(base64url_encode(json.dumps(payload)))
     signing_input = '.'.join(segments).encode('utf-8')
 
     if isinstance(key, str):
@@ -154,8 +153,8 @@ def jwt_encode(payload, key, algorithm='HS256'):
         signature = signing_methods[algorithm](signing_input, key)
     except KeyError:
         raise NotImplementedError("Algorithm not supported")
-    segments.append(base64url_encode(signature).decode('utf-8'))
-    return '.'.join(segments).encode('utf-8')
+    segments.append(base64url_encode(signature))
+    return '.'.join(segments)
 
 
 @never_cache
@@ -191,3 +190,4 @@ def authorize_jwt(request):
     if request.GET.get("return_to"):
         return_url += "&return_to={}".format(request.GET.get("return_to"))
     return HttpResponseRedirect(return_url)
+
