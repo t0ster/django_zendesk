@@ -143,9 +143,11 @@ def jwt_encode(payload, key, algorithm='HS256'):
     segments.append(base64url_encode(json.dumps(header)))
     segments.append(base64url_encode(json.dumps(payload)))
     signing_input = '.'.join(segments)
+
+    if isinstance(key, str):
+        key = key.encode('utf-8')
+
     try:
-        if isinstance(key, unicode):
-            key = key.encode('utf-8')
         signature = signing_methods[algorithm](signing_input, key)
     except KeyError:
         raise NotImplementedError("Algorithm not supported")
