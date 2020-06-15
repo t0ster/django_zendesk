@@ -134,15 +134,18 @@ signing_methods = {
 }
 
 def base64url_encode(input):
+    if isinstance(input, str):
+        input = input.encode('utf-8')
     return base64.urlsafe_b64encode(input).replace('=', '')
 
 
 def jwt_encode(payload, key, algorithm='HS256'):
     segments = []
     header = {"typ": "JWT", "alg": algorithm}
-    segments.append(base64url_encode(json.dumps(header)))
-    segments.append(base64url_encode(json.dumps(payload)))
-    signing_input = '.'.join(segments)
+
+    segments.append(base64url_encode(json.dumps(header)).decode('utf-8'))
+    segments.append(base64url_encode(json.dumps(payload)).decode('utf-8'))
+    signing_input = '.'.join(segments).encode('utf-8')
 
     if isinstance(key, str):
         key = key.encode('utf-8')
@@ -151,8 +154,8 @@ def jwt_encode(payload, key, algorithm='HS256'):
         signature = signing_methods[algorithm](signing_input, key)
     except KeyError:
         raise NotImplementedError("Algorithm not supported")
-    segments.append(base64url_encode(signature))
-    return '.'.join(segments)
+    segments.append(base64url_encode(signature).decode('utf-8'))
+    return '.'.join(segments).encode('utf-8')
 
 
 @never_cache
