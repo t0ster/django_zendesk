@@ -25,15 +25,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1b41e70-7c75-4337-a1e2-d832b6354b9e" name="Default Changelist" comment="Bump">
-      <change afterPath="$PROJECT_DIR$/.idea/markdown-navigator-enh.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/markdown-navigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/markdown-navigator/profiles_settings.xml" beforeDir="false" />
+    <list default="true" id="a1b41e70-7c75-4337-a1e2-d832b6354b9e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/pylint.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/django_zendesk/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_zendesk/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_zendesk/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_zendesk/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_zendesk/test_urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_zendesk/test_urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +92,7 @@
       <option name="presentableId" value="Default" />
       <updated>1592237769817</updated>
       <workItem from="1592237771095" duration="3588000" />
-      <workItem from="1595356323847" duration="710000" />
+      <workItem from="1595356323847" duration="1058000" />
     </task>
     <task id="LOCAL-00001" summary="Bug fix for python3.8">
       <created>1592238004194</created>
@@ -127,7 +122,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592240115354</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="django20 version update">
+      <created>1595357149190</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1595357149190</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,13 +153,18 @@
     <MESSAGE value="Version bump" />
     <MESSAGE value="More." />
     <MESSAGE value="Bump" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bump" />
+    <MESSAGE value="django20 version update" />
+    <option name="LAST_COMMIT_MESSAGE" value="django20 version update" />
   </component>
   <component name="WindowStateProjectService">
     <state x="581" y="272" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1595357103511">
       <screen x="0" y="23" width="2560" height="1347" />
     </state>
     <state x="581" y="272" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.2560.1347@0.23.2560.1347" timestamp="1595357103511" />
+    <state x="728" y="212" key="CommitChangelistDialog2" timestamp="1595357149049">
+      <screen x="0" y="23" width="2560" height="1347" />
+    </state>
+    <state x="728" y="212" key="CommitChangelistDialog2/0.23.2560.1347@0.23.2560.1347" timestamp="1595357149049" />
     <state x="795" y="214" key="SettingsEditor" timestamp="1595356865660">
       <screen x="0" y="23" width="2560" height="1347" />
     </state>
@@ -167,9 +174,10 @@
       <screen x="0" y="23" width="2560" height="1347" />
     </state>
     <state x="847" y="349" width="540" height="524" key="StructurePopup/0.23.2560.1347@0.23.2560.1347" timestamp="1595356874040" />
-    <state x="1520" y="803" key="Vcs.Push.Dialog.v2" timestamp="1592240116772">
-      <screen x="0" y="23" width="3840" height="2081" />
+    <state x="1013" y="528" key="Vcs.Push.Dialog.v2" timestamp="1595357150162">
+      <screen x="0" y="23" width="2560" height="1347" />
     </state>
     <state x="1520" y="803" key="Vcs.Push.Dialog.v2/-1792.842.1792.1097/0.23.3840.2081@0.23.3840.2081" timestamp="1592240116772" />
+    <state x="1013" y="528" key="Vcs.Push.Dialog.v2/0.23.2560.1347@0.23.2560.1347" timestamp="1595357150162" />
   </component>
 </project>
