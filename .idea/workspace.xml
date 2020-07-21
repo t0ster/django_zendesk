@@ -26,15 +26,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1b41e70-7c75-4337-a1e2-d832b6354b9e" name="Default Changelist" comment="Bump">
+      <change afterPath="$PROJECT_DIR$/.idea/markdown-navigator-enh.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/markdown-navigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/markdown-navigator/profiles_settings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_zendesk/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_zendesk/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_zendesk/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_zendesk/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_zendesk/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_zendesk/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_zendesk/test_urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_zendesk/test_urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="django_zendesk" />
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JupyterTrust" id="427ec1a3-2eaa-4a5e-a3da-70edacd25fa1" />
@@ -47,7 +61,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -55,9 +71,24 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
   </component>
   <component name="RunManager" selected="Python.Build" />
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="a1b41e70-7c75-4337-a1e2-d832b6354b9e" name="Default Changelist" comment="" />
@@ -66,6 +97,7 @@
       <option name="presentableId" value="Default" />
       <updated>1592237769817</updated>
       <workItem from="1592237771095" duration="3588000" />
+      <workItem from="1595356323847" duration="710000" />
     </task>
     <task id="LOCAL-00001" summary="Bug fix for python3.8">
       <created>1592238004194</created>
@@ -99,14 +131,16 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -120,10 +154,19 @@
     <option name="LAST_COMMIT_MESSAGE" value="Bump" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1429" y="702" key="SettingsEditor" timestamp="1592238187098">
-      <screen x="0" y="23" width="3840" height="2081" />
+    <state x="581" y="272" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1595357103511">
+      <screen x="0" y="23" width="2560" height="1347" />
+    </state>
+    <state x="581" y="272" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.2560.1347@0.23.2560.1347" timestamp="1595357103511" />
+    <state x="795" y="214" key="SettingsEditor" timestamp="1595356865660">
+      <screen x="0" y="23" width="2560" height="1347" />
     </state>
     <state x="1429" y="702" key="SettingsEditor/-1792.842.1792.1097/0.23.3840.2081@0.23.3840.2081" timestamp="1592238187098" />
+    <state x="795" y="214" key="SettingsEditor/0.23.2560.1347@0.23.2560.1347" timestamp="1595356865660" />
+    <state x="847" y="349" width="540" height="524" key="StructurePopup" timestamp="1595356874040">
+      <screen x="0" y="23" width="2560" height="1347" />
+    </state>
+    <state x="847" y="349" width="540" height="524" key="StructurePopup/0.23.2560.1347@0.23.2560.1347" timestamp="1595356874040" />
     <state x="1520" y="803" key="Vcs.Push.Dialog.v2" timestamp="1592240116772">
       <screen x="0" y="23" width="3840" height="2081" />
     </state>

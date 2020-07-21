@@ -2,6 +2,4 @@
 
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('django_zendesk.views',
-    (r'^authenticate\.html', 'authorize'),
-)
+urlpatterns = patterns('django_zendesk.views', (r'^authenticate\.html', 'authorize'),)

@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 """models.py: Zendesk models"""
 
-from __future__ import unicode_literals
 from __future__ import print_function
+from __future__ import unicode_literals
 
 import json
 import logging
 import pprint
-
-from django.conf import settings
 import requests
+from django.conf import settings
 
 __author__ = 'Steven Klass'
 __date__ = '2011/06/22 09:56:26'
