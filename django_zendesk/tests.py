@@ -1,13 +1,14 @@
 #! /usr/bin/env python
 # -*- coding: utf8 -*-
 
+import django.test
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils.http import urlquote
-import django.test
-from django.conf import settings
 
 from django_zendesk import views
+
 
 class ViewsTestCase(django.test.TestCase):
     urls = 'django_zendesk.test_urls'
