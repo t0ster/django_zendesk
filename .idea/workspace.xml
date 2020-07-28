@@ -15,21 +15,11 @@
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:refactor" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
     </expand>
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1b41e70-7c75-4337-a1e2-d832b6354b9e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/pylint.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_zendesk/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_zendesk/__init__.py" afterDir="false" />
-    </list>
+    <list default="true" id="a1b41e70-7c75-4337-a1e2-d832b6354b9e" name="Default Changelist" comment="django20 version update" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,18 +59,7 @@
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
   </component>
   <component name="RunManager" selected="Python.Build" />
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
-  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -129,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595357149190</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="django20 version update">
+      <created>1595973587745</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1595973587745</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,13 +126,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Bug fix for python3.8" />
@@ -174,10 +159,10 @@
       <screen x="0" y="23" width="2560" height="1347" />
     </state>
     <state x="847" y="349" width="540" height="524" key="StructurePopup/0.23.2560.1347@0.23.2560.1347" timestamp="1595356874040" />
-    <state x="1013" y="528" key="Vcs.Push.Dialog.v2" timestamp="1595357150162">
-      <screen x="0" y="23" width="2560" height="1347" />
+    <state x="1520" y="803" key="Vcs.Push.Dialog.v2" timestamp="1595973596237">
+      <screen x="0" y="23" width="3840" height="2081" />
     </state>
-    <state x="1520" y="803" key="Vcs.Push.Dialog.v2/-1792.842.1792.1097/0.23.3840.2081@0.23.3840.2081" timestamp="1592240116772" />
+    <state x="1520" y="803" key="Vcs.Push.Dialog.v2/-1792.842.1792.1097/0.23.3840.2081@0.23.3840.2081" timestamp="1595973596237" />
     <state x="1013" y="528" key="Vcs.Push.Dialog.v2/0.23.2560.1347@0.23.2560.1347" timestamp="1595357150162" />
   </component>
 </project>
