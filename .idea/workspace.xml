@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -19,16 +22,22 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1b41e70-7c75-4337-a1e2-d832b6354b9e" name="Default Changelist" comment="django20 version update" />
+    <list default="true" id="a1b41e70-7c75-4337-a1e2-d832b6354b9e" name="Default Changelist" comment="django20 version update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/pyvenv.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/.venv/pyvenv.cfg" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FavoritesManager">
-    <favorites_list name="django_zendesk" />
-  </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
@@ -56,9 +65,30 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.Build" />
+  <component name="RunManager" selected="Python tests.Unittests for tests.ViewsTestCase">
+    <configuration name="Unittests for tests.ViewsTestCase" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="django_zendesk" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/django_zendesk" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.ViewsTestCase&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Unittests for tests.ViewsTestCase" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
@@ -72,6 +102,8 @@
       <updated>1592237769817</updated>
       <workItem from="1592237771095" duration="3588000" />
       <workItem from="1595356323847" duration="1058000" />
+      <workItem from="1596058068276" duration="110000" />
+      <workItem from="1609107293839" duration="53000" />
     </task>
     <task id="LOCAL-00001" summary="Bug fix for python3.8">
       <created>1592238004194</created>
@@ -115,11 +147,18 @@
       <option name="project" value="LOCAL" />
       <updated>1595973587745</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="django20 version update">
+      <created>1595974132008</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1595974132008</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -140,29 +179,5 @@
     <MESSAGE value="Bump" />
     <MESSAGE value="django20 version update" />
     <option name="LAST_COMMIT_MESSAGE" value="django20 version update" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="581" y="272" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1595357103511">
-      <screen x="0" y="23" width="2560" height="1347" />
-    </state>
-    <state x="581" y="272" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.2560.1347@0.23.2560.1347" timestamp="1595357103511" />
-    <state x="728" y="212" key="CommitChangelistDialog2" timestamp="1595357149049">
-      <screen x="0" y="23" width="2560" height="1347" />
-    </state>
-    <state x="728" y="212" key="CommitChangelistDialog2/0.23.2560.1347@0.23.2560.1347" timestamp="1595357149049" />
-    <state x="795" y="214" key="SettingsEditor" timestamp="1595356865660">
-      <screen x="0" y="23" width="2560" height="1347" />
-    </state>
-    <state x="1429" y="702" key="SettingsEditor/-1792.842.1792.1097/0.23.3840.2081@0.23.3840.2081" timestamp="1592238187098" />
-    <state x="795" y="214" key="SettingsEditor/0.23.2560.1347@0.23.2560.1347" timestamp="1595356865660" />
-    <state x="847" y="349" width="540" height="524" key="StructurePopup" timestamp="1595356874040">
-      <screen x="0" y="23" width="2560" height="1347" />
-    </state>
-    <state x="847" y="349" width="540" height="524" key="StructurePopup/0.23.2560.1347@0.23.2560.1347" timestamp="1595356874040" />
-    <state x="1520" y="803" key="Vcs.Push.Dialog.v2" timestamp="1595973596237">
-      <screen x="0" y="23" width="3840" height="2081" />
-    </state>
-    <state x="1520" y="803" key="Vcs.Push.Dialog.v2/-1792.842.1792.1097/0.23.3840.2081@0.23.3840.2081" timestamp="1595973596237" />
-    <state x="1013" y="528" key="Vcs.Push.Dialog.v2/0.23.2560.1347@0.23.2560.1347" timestamp="1595357150162" />
   </component>
 </project>
