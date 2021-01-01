@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """A setuptools based setup module.
 
 See:
@@ -10,10 +11,10 @@ from setuptools import setup, find_packages
 # To use a consistent encoding
 from codecs import open
 from os import path
+from django_zendesk import __version__, __name__, __author__
 
 here = path.abspath(path.dirname(__file__))
 
-from django_zendesk import __version__, __name__, __author__
 
 name = 'pivotal_' + __name__
 base_url = 'https://github.com/pivotal-energy-solutions/django_zendesk'
@@ -50,7 +51,8 @@ setup(
     # This is a one-line description or tagline of what your project does. This
     # corresponds to the "Summary" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#summary
-    description='Provides single-sign on functionality between a django.contrib.auth based site and Zendesk',  # Required
+    description='Provides single-sign on functionality between a django.contrib.auth'
+                ' based site and Zendesk',  # Required
 
     # This is an optional longer description of your project that represents
     # the body of text which users will see when they visit PyPI.

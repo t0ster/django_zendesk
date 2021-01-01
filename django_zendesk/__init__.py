@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals
-
 __name__ = 'django_zendesk'
 __author__ = 'Pivotal Energy Solutions'
 __version_info__ = (2, 1, 0)
