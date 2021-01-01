@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from .views import authorize
+from django_zendesk.views import authorize
 
 urlpatterns = [
     path('admin/', admin.site.urls),
