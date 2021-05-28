@@ -23,16 +23,18 @@ from django.conf import settings
 try:
     from apps.company.models import COMPANY_TYPES
 except ImportError:
-    COMPANY_TYPES_PLURAL = OrderedDict([
-        ('builder', ('Home Builder', 'Home Builders')),
-        ('eep', ('Program Sponsor', 'Program Sponsors')),
-        ('provider', ('Rating Provider', 'Providers')),
-        ('rater', ('Rating Company', 'Rating Companies')),
-        ('utility', ('Utility Company', 'Utility Companies')),
-        ('hvac', ('HVAC Contractor', 'HVAC Contractors')),
-        ('qa', ('QA/QC Company', 'QA/QC Companies')),
-        ('general', ('General Company', 'General Companies'))
-    ])
+    COMPANY_TYPES_PLURAL = OrderedDict(
+        [
+            ("builder", ("Home Builder", "Home Builders")),
+            ("eep", ("Program Sponsor", "Program Sponsors")),
+            ("provider", ("Rating Provider", "Providers")),
+            ("rater", ("Rating Company", "Rating Companies")),
+            ("utility", ("Utility Company", "Utility Companies")),
+            ("hvac", ("HVAC Contractor", "HVAC Contractors")),
+            ("qa", ("QA/QC Company", "QA/QC Companies")),
+            ("general", ("General Company", "General Companies")),
+        ]
+    )
 
     COMPANY_TYPES = [(key, COMPANY_TYPES_PLURAL[key][0]) for key in COMPANY_TYPES_PLURAL.keys()]
 
@@ -44,28 +46,28 @@ def get_tags(user):
     extra_fields = user
     tags = []
     if extra_fields.is_company_admin:
-        tags.append('company_admin')
+        tags.append("company_admin")
     if company:
         tags.append(company.slug)
         tags.append(company.company_type)
-        tags.append('view_{}'.format(company.company_type))
-        if company.company_type == 'provider':
-            tags.append('view_{}'.format('rater'))
+        tags.append("view_{}".format(company.company_type))
+        if company.company_type == "provider":
+            tags.append("view_{}".format("rater"))
         if company.is_eep_sponsor:
-            tags.append('is_sponsor')
-            tags.append('sponsor_{}'.format(company.slug))
+            tags.append("is_sponsor")
+            tags.append("sponsor_{}".format(company.slug))
             for company_type in dict(COMPANY_TYPES).keys():
-                if 'company.view_{}organization'.format(company_type) in user.get_all_permissions():
-                    tags.append('sponsor_{}_{}'.format(company.slug, company_type))
+                if "company.view_{}organization".format(company_type) in user.get_all_permissions():
+                    tags.append("sponsor_{}_{}".format(company.slug, company_type))
         if company.sponsors.count():
-            tags.append('sponsored')
+            tags.append("sponsored")
             for sponsor in company.sponsors.all():
-                tags.append('sponsor_{}'.format(sponsor.slug))
-                tags.append('sponsor_{}_{}'.format(sponsor.slug, company.company_type))
-                if company.company_type == 'provider':
-                    tags.append('sponsor_{}_{}'.format(sponsor.slug, 'rater'))
+                tags.append("sponsor_{}".format(sponsor.slug))
+                tags.append("sponsor_{}_{}".format(sponsor.slug, company.company_type))
+                if company.company_type == "provider":
+                    tags.append("sponsor_{}_{}".format(sponsor.slug, "rater"))
         if company.is_customer:
-            tags.append('customer')
+            tags.append("customer")
     return tags
 
 
@@ -75,7 +77,7 @@ def authorize(request):
     """This will SSO authorize a user.  This passes back to  the newer remoteauth url"""
 
     try:
-        timestamp = request.GET['timestamp']
+        timestamp = request.GET["timestamp"]
     except KeyError:
         raise Http404
 
@@ -83,36 +85,36 @@ def authorize(request):
     company = user.company
 
     data = OrderedDict()
-    data['name'] = user.get_full_name()
-    data['email'] = user.email
-    data['external_id'] = str(user.id)
-    data['organization'] = ''
-    data['tags'] = ''
-    data['remote_photo_url'] = ''
-    data['token'] = settings.ZENDESK_TOKEN
-    data['timestamp'] = timestamp
+    data["name"] = user.get_full_name()
+    data["email"] = user.email
+    data["external_id"] = str(user.id)
+    data["organization"] = ""
+    data["tags"] = ""
+    data["remote_photo_url"] = ""
+    data["token"] = settings.ZENDESK_TOKEN
+    data["timestamp"] = timestamp
 
     tags = get_tags(user)
     if company:
-        data['organization'] = company.name
+        data["organization"] = company.name
 
     if len(tags):
-        data['tags'] = ','.join(tags)
+        data["tags"] = ",".join(tags)
 
-    hash_str = '|'.join(data.values()).encode('utf-8')
+    hash_str = "|".join(data.values()).encode("utf-8")
     hash = md5(hash_str).hexdigest()
 
     # Build our URL..
-    url = '{}/access/remoteauth/?name={}'.format(settings.ZENDESK_URL, urlquote(data['name']))
-    url += '&email={}&timestamp={}'.format(urlquote(data['email']), timestamp)
-    url += '&hash={}&external_id={}'.format(hash, data['external_id'])
+    url = "{}/access/remoteauth/?name={}".format(settings.ZENDESK_URL, urlquote(data["name"]))
+    url += "&email={}&timestamp={}".format(urlquote(data["email"]), timestamp)
+    url += "&hash={}&external_id={}".format(hash, data["external_id"])
 
     if company:
-        url += '&organization={}'.format(urlquote(data['organization']))
-    if data['tags'] != '':
-        url += '&tags={}'.format(urlquote(data['tags']))
-    if data['remote_photo_url'] != '':
-        url += '&remote_photo_url={}'.format(urlquote(data['remote_photo_url']))
+        url += "&organization={}".format(urlquote(data["organization"]))
+    if data["tags"] != "":
+        url += "&tags={}".format(urlquote(data["tags"]))
+    if data["remote_photo_url"] != "":
+        url += "&remote_photo_url={}".format(urlquote(data["remote_photo_url"]))
 
     return HttpResponseRedirect(iri_to_uri(url))
 
@@ -121,34 +123,34 @@ def authorize(request):
 
 
 signing_methods = {
-    'HS256': lambda msg, key: hmac.new(key, msg, hashlib.sha256).digest(),
-    'HS384': lambda msg, key: hmac.new(key, msg, hashlib.sha384).digest(),
-    'HS512': lambda msg, key: hmac.new(key, msg, hashlib.sha512).digest(),
+    "HS256": lambda msg, key: hmac.new(key, msg, hashlib.sha256).digest(),
+    "HS384": lambda msg, key: hmac.new(key, msg, hashlib.sha384).digest(),
+    "HS512": lambda msg, key: hmac.new(key, msg, hashlib.sha512).digest(),
 }
 
 
 def base64url_encode(input):
     if isinstance(input, str):
-        input = input.encode('utf-8')
-    return base64.urlsafe_b64encode(input).decode('utf-8').replace('=', '')
+        input = input.encode("utf-8")
+    return base64.urlsafe_b64encode(input).decode("utf-8").replace("=", "")
 
 
-def jwt_encode(payload, key, algorithm='HS256'):
+def jwt_encode(payload, key, algorithm="HS256"):
     segments = []
-    header = {'typ': 'JWT', 'alg': algorithm}
+    header = {"typ": "JWT", "alg": algorithm}
     segments.append(base64url_encode(json.dumps(header)))
     segments.append(base64url_encode(json.dumps(payload)))
-    signing_input = '.'.join(segments).encode('utf-8')
+    signing_input = ".".join(segments).encode("utf-8")
 
     if isinstance(key, str):
-        key = key.encode('utf-8')
+        key = key.encode("utf-8")
 
     try:
         signature = signing_methods[algorithm](signing_input, key)
     except KeyError:
-        raise NotImplementedError('Algorithm not supported')
+        raise NotImplementedError("Algorithm not supported")
     segments.append(base64url_encode(signature))
-    return '.'.join(segments)
+    return ".".join(segments)
 
 
 @never_cache
@@ -158,24 +160,26 @@ def authorize_jwt(request):
     company = user.company
 
     data = OrderedDict()
-    data['iat'] = int(time.time())
-    data['jti'] = str(uuid.uuid1())
-    data['name'] = user.get_full_name()
-    data['email'] = user.email
-    data['external_id'] = int(user.id)
-    data['organization'] = ''
-    data['tags'] = ''
-    data['remote_photo_url'] = ''
+    data["iat"] = int(time.time())
+    data["jti"] = str(uuid.uuid1())
+    data["name"] = user.get_full_name()
+    data["email"] = user.email
+    data["external_id"] = int(user.id)
+    data["organization"] = ""
+    data["tags"] = ""
+    data["remote_photo_url"] = ""
 
     if company:
-        data['organization'] = company.name
+        data["organization"] = company.name
 
     tags = get_tags(user)
     if len(tags):
-        data['tags'] = tags
+        data["tags"] = tags
 
     jwt_string = jwt_encode(data, settings.ZENDESK_SHARED_KEY)
-    return_url = 'https://' + settings.ZENDESK_SUBDOMAIN + '.zendesk.com/access/jwt?jwt=' + jwt_string
-    if request.GET.get('return_to'):
-        return_url += '&return_to={}'.format(request.GET.get('return_to'))
+    return_url = (
+        "https://" + settings.ZENDESK_SUBDOMAIN + ".zendesk.com/access/jwt?jwt=" + jwt_string
+    )
+    if request.GET.get("return_to"):
+        return_url += "&return_to={}".format(request.GET.get("return_to"))
     return HttpResponseRedirect(return_url)

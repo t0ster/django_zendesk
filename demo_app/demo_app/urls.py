@@ -19,7 +19,4 @@ from django.urls import path
 
 from django_zendesk.views import authorize
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('zendesk-auth/', authorize)
-]
+urlpatterns = [path("admin/", admin.site.urls), path("zendesk-auth/", authorize)]
