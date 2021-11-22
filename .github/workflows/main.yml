@@ -165,12 +165,12 @@ jobs:
         env:
           PYTHONWARNINGS: once::DeprecationWarning
         run: |
-          export PYTHONPATH=$(pwd)/django_zendesk:
+          export PYTHONPATH=`pwd`
           demo_app/manage.py test --noinput --settings=demo_app.settings_test django_zendesk
 
       - name: Django source code check
         run: |
-          export PYTHONPATH=$(pwd)/django_zendesk:
+          export PYTHONPATH=`pwd`
           python demo_app/manage.py check
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
