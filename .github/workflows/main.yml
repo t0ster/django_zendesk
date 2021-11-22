@@ -88,7 +88,7 @@ jobs:
           pip install bandit
 
       - name: Bandit
-        run: bandit -r appsearch -x appsearch/tests -f json -o report.json
+        run: bandit -r django_zendesk -x django_zendesk/tests -f json -o report.json
 
       - name: Show report
         if: ${{ success() || failure() }}
@@ -165,10 +165,12 @@ jobs:
         env:
           PYTHONWARNINGS: once::DeprecationWarning
         run: |
+          export PYTHONPATH=$(pwd)/django_zendesk:
           demo_app/manage.py test --noinput --settings=demo_app.settings_test django_zendesk
 
       - name: Django source code check
         run: |
+          export PYTHONPATH=$(pwd)/django_zendesk:
           python demo_app/manage.py check
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
