@@ -1,11 +1,18 @@
 # -*- coding: utf-8 -*-
 """Django Zendesk"""
 
+__name__ = "django_zendesk"
+__author__ = "Pivotal Energy Solutions"
+__version_info__ = (2, 1, 2)
+__version__ = "2.1.2"
+__date__ = "2014/07/22 4:47:00 PM"
+__credits__ = ["Steven Klass", "Tim Valenta"]
+__license__ = "See the file LICENSE.txt for licensing information."
+
 from setuptools import setup, find_packages
 
 from codecs import open
 from os import path
-from django_zendesk import __version__, __name__, __author__
 
 here = path.abspath(path.dirname(__file__))
 
@@ -17,7 +24,7 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
 
 setup(
     name=name,  # Required
-    version=__version__,  # Required
+    version="2.1.2",  # Required
     description="Provides single-sign on functionality between a django.contrib.auth"
     " based site and Zendesk",  # Required
     long_description=long_description,  # Optional
