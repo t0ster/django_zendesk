@@ -37,7 +37,6 @@ setup(
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Django",
-        "Framework :: Django :: 2.2",
         "Framework :: Django :: 3.0",
         "Framework :: Django :: 3.1",
         "Framework :: Django :: 3.2",
@@ -52,9 +51,7 @@ setup(
         "Topic :: Utilities",
     ],
     python_requires=">=3.8.*",
-    install_requires=[
-        "django>2.2",
-    ],
+    install_requires=["django>3.0", "requests"],
     keywords="django zendesk authentication",  # Optional
     packages=find_packages(exclude=["contrib", "docs", "tests"]),  # Required
     project_urls={  # Optional
