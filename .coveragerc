@@ -1,10 +1,12 @@
 [run]
 branch = True
 omit =
+    demo_app/*
     */migrations/*
 
 [report]
 fail_under = 63
 omit =
+    demo_app/*
     */migrations/*
     */test*
