@@ -5,7 +5,7 @@ omit =
     */migrations/*
 
 [report]
-fail_under = 63
+fail_under = 16
 omit =
     demo_app/*
     */migrations/*
