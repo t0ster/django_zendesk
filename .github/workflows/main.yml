@@ -197,6 +197,7 @@ jobs:
           PYTHONWARNINGS: once::DeprecationWarning
         run: |
           coverage erase
+          export PYTHONPATH=`pwd`
           coverage run demo_app/manage.py test --noinput --settings=demo_app.settings_test django_zendesk
           coverage xml -o ./coverage.xml
 
