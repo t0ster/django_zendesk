@@ -51,7 +51,7 @@ setup(
         "Topic :: Utilities",
     ],
     python_requires=">=3.8.*",
-    install_requires=["django>3.0", "requests"],
+    install_requires=["django~=3", "requests"],
     keywords="django zendesk authentication",  # Optional
     packages=find_packages(exclude=["contrib", "docs", "tests"]),  # Required
     project_urls={  # Optional

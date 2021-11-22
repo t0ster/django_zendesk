@@ -1,2 +1,2 @@
 python-dateutil
-django~=3.2
+django~=3
