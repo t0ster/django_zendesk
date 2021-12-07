@@ -11,13 +11,13 @@ import json
 import uuid
 from hashlib import md5
 import time
+from urllib.parse import quote as urlquote
 
 from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 
 from django.utils.encoding import iri_to_uri
-from django.utils.http import urlquote
 from django.conf import settings
 
 try:
