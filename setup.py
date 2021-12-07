@@ -45,13 +45,12 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Topic :: Utilities",
     ],
-    python_requires=">=3.8.*",
-    install_requires=["django~=3.2", "requests"],
+    python_requires=">=3.9.*",
+    install_requires=["django~=4.0", "requests"],
     keywords="django zendesk authentication",  # Optional
     packages=find_packages(exclude=["contrib", "docs", "tests"]),  # Required
     project_urls={  # Optional

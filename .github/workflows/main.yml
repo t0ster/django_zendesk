@@ -1,11 +1,10 @@
-# This is used for Registration
+# This is used for simulations
 
-name: Django Zendesk Checks
+name: Simulation Tests
 
 on: push
 
 jobs:
-
   cancel:
     name: Canceling Outstanding Jobs
     runs-on: ubuntu-latest
@@ -22,7 +21,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: "3.10"
 
       - name: Install dependencies
         run: |
@@ -32,7 +31,7 @@ jobs:
           pip install -r requirements_dev.txt --user
 
       - name: outdated
-        run: pip list --outdated --not-required --user | grep . && echo "There are outdated packages" && exit 1 || echo "All packages up to date"
+        run: pip list --outdated --not-required --exclude=lxml --user | grep . && echo "There are outdated packages" && exit 1 || echo "All packages up to date"
 
   black:
     name: Black
@@ -41,7 +40,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: "3.10"
 
       - name: Install dependencies
         run: |
@@ -60,7 +59,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: "3.10"
 
       - name: Install dependencies
         run: |
@@ -80,7 +79,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: "3.10"
 
       - name: Install dependencies
         run: |
@@ -88,7 +87,7 @@ jobs:
           pip install bandit
 
       - name: Bandit
-        run: bandit -r django_zendesk -x django_zendesk/tests -s B303 -f json -o report.json
+        run: bandit -r simulation -x simulation/tests -s B101 -f json -o report.json
 
       - name: Show report
         if: ${{ success() || failure() }}
@@ -109,8 +108,8 @@ jobs:
       max-parallel: 4
       matrix:
         db: [ sqlite, mysql ]
-        django-version: [ "~=3.2" ]
-        python-version: [ 3.8, 3.9, "3.10"]
+        django-version: [ "~=3.2", "~=4.0" ]
+        python-version: [ "3.10" ]
         experimental: [ false ]
 
     services:
@@ -150,13 +149,14 @@ jobs:
       - name: Run Django Tests
         env:
           PYTHONWARNINGS: once::DeprecationWarning
+          TASK_ALWAYS_EAGER: 1
+          GOOGLE_MAPS_CLIENT_ID: ${{ secrets.GOOGLE_MAPS_CLIENT_ID }}
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
         run: |
-          export PYTHONPATH=`pwd`
-          demo_app/manage.py test --noinput --settings=demo_app.settings_test django_zendesk
+          demo_app/manage.py test --noinput --settings=demo_app.settings_test simulation
 
       - name: Django Check
         run: |
-          export PYTHONPATH=`pwd`
           python demo_app/manage.py check
 
   coverage:
@@ -167,7 +167,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: "3.10"
 
       - name: Install dependencies
         run: |
@@ -179,10 +179,12 @@ jobs:
       - name: Run Django Coverage Test
         env:
           PYTHONWARNINGS: once::DeprecationWarning
+          TASK_ALWAYS_EAGER: 1
+          GOOGLE_MAPS_CLIENT_ID: ${{ secrets.GOOGLE_MAPS_CLIENT_ID }}
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
         run: |
           coverage erase
-          export PYTHONPATH=`pwd`
-          coverage run demo_app/manage.py test --noinput --settings=demo_app.settings_test django_zendesk
+          coverage run demo_app/manage.py test --noinput --settings=demo_app.settings_test simulation
           coverage xml -o ./coverage.xml
 
       - name: Show report
@@ -215,7 +217,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: "3.10"
 
       - name: Install dependencies
         run: |
@@ -226,4 +228,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
         run: |
-          bumper.py --directory . --exclude=.idea,.github,demo_app --version_files django_zendesk/__init__.py --repo=pivotal-energy-solutions/django_zendesk -v
+          bumper.py --directory . --exclude=.idea,.github,demo_app --version_files simulation/__init__.py --repo=pivotal-energy-solutions/simulation -v
