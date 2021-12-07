@@ -1,6 +1,6 @@
-# This is used for simulations
+# This is used for Registration
 
-name: Simulation Tests
+name: Django Zendesk Checks
 
 on: push
 
@@ -87,7 +87,7 @@ jobs:
           pip install bandit
 
       - name: Bandit
-        run: bandit -r simulation -x simulation/tests -s B101 -f json -o report.json
+        run: bandit -r django_zendesk -x django_zendesk/tests -s B303 -f json -o report.json
 
       - name: Show report
         if: ${{ success() || failure() }}
@@ -108,8 +108,8 @@ jobs:
       max-parallel: 4
       matrix:
         db: [ sqlite, mysql ]
-        django-version: [ "~=3.2", "~=4.0" ]
-        python-version: [ "3.10" ]
+        django-version: [ "~=3.2" ]
+        python-version: [ 3.8, 3.9, "3.10"]
         experimental: [ false ]
 
     services:
@@ -149,14 +149,13 @@ jobs:
       - name: Run Django Tests
         env:
           PYTHONWARNINGS: once::DeprecationWarning
-          TASK_ALWAYS_EAGER: 1
-          GOOGLE_MAPS_CLIENT_ID: ${{ secrets.GOOGLE_MAPS_CLIENT_ID }}
-          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
         run: |
-          demo_app/manage.py test --noinput --settings=demo_app.settings_test simulation
+          export PYTHONPATH=`pwd`
+          demo_app/manage.py test --noinput --settings=demo_app.settings_test django_zendesk
 
       - name: Django Check
         run: |
+          export PYTHONPATH=`pwd`
           python demo_app/manage.py check
 
   coverage:
@@ -179,12 +178,10 @@ jobs:
       - name: Run Django Coverage Test
         env:
           PYTHONWARNINGS: once::DeprecationWarning
-          TASK_ALWAYS_EAGER: 1
-          GOOGLE_MAPS_CLIENT_ID: ${{ secrets.GOOGLE_MAPS_CLIENT_ID }}
-          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
         run: |
           coverage erase
-          coverage run demo_app/manage.py test --noinput --settings=demo_app.settings_test simulation
+          export PYTHONPATH=`pwd`
+          coverage run demo_app/manage.py test --noinput --settings=demo_app.settings_test django_zendesk
           coverage xml -o ./coverage.xml
 
       - name: Show report
@@ -228,4 +225,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
         run: |
-          bumper.py --directory . --exclude=.idea,.github,demo_app --version_files simulation/__init__.py --repo=pivotal-energy-solutions/simulation -v
+          bumper.py --directory . --exclude=.idea,.github,demo_app --version_files django_zendesk/__init__.py --repo=pivotal-energy-solutions/django_zendesk -v
