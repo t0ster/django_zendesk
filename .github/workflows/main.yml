@@ -31,7 +31,7 @@ jobs:
           pip install -r requirements_dev.txt --user
 
       - name: outdated
-        run: pip list --outdated --not-required --exclude=lxml --user | grep . && echo "There are outdated packages" && exit 1 || echo "All packages up to date"
+        run: pip list --outdated --not-required --exclude=django --user | grep . && echo "There are outdated packages" && exit 1 || echo "All packages up to date"
 
   black:
     name: Black
