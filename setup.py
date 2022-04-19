@@ -3,8 +3,8 @@
 
 __name__ = "django_zendesk"
 __author__ = "Pivotal Energy Solutions"
-__version_info__ = (2, 1, 7)
-__version__ = "2.1.7"
+__version_info__ = (2, 1, 8)
+__version__ = "2.1.8"
 __date__ = "2014/07/22 4:47:00 PM"
 __credits__ = ["Steven Klass", "Tim Valenta"]
 __license__ = "See the file LICENSE.txt for licensing information."
@@ -24,7 +24,7 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
 
 setup(
     name=name,  # Required
-    version="2.1.7",  # Required
+    version="2.1.8",  # Required
     description="Provides single-sign on functionality between a django.contrib.auth"
     " based site and Zendesk",  # Required
     long_description=long_description,  # Optional
