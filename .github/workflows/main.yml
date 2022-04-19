@@ -2,7 +2,11 @@
 
 name: Django Zendesk Checks
 
-on: push
+on:
+  push:
+  schedule:
+    - cron: '0 1 * * 5'
+
 
 jobs:
   cancel:
@@ -142,7 +146,7 @@ jobs:
         if: matrix.db == 'mysql'
         run: |
           mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "SHOW DATABASES;" 2>&1 > /dev/null
-          mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "SHOW COLLATION;" 
+          mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "SHOW VARIABLES LIKE  'char%';"
 
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
@@ -215,6 +219,7 @@ jobs:
 
   release:
     name: Release
+    if: github.event.schedule != '0 1 * * 5'
     runs-on: ubuntu-latest
     needs: ['cancel', 'outdated', 'black', 'pre-commit', 'security', 'tests', 'coverage']
     outputs:
