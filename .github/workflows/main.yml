@@ -141,7 +141,8 @@ jobs:
       - name: Verify MySQL connection from host
         if: matrix.db == 'mysql'
         run: |
-          mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "SHOW DATABASES" 2>&1 > /dev/null
+          mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "SHOW DATABASES;" 2>&1 > /dev/null
+          mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "SHOW COLLATION;" 
 
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
