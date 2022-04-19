@@ -103,6 +103,7 @@ DATABASES = {
         "PASSWORD": env("MYSQL_PASSWORD"),
         "HOST": env("MYSQL_HOST"),
         "PORT": env("DOCKER_MYSQL_PORT", default=env("MYSQL_PORT", default="3306")),
+        "OPTIONS": {"read_default_file": os.path.join(Path(__file__).resolve(), "my.cnf")},
     }
 }
 
