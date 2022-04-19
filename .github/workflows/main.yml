@@ -167,6 +167,7 @@ jobs:
           TASK_ALWAYS_EAGER: 1
           DB_TYPE: ${{ matrix.db }}
         run: |
+          export PYTHONPATH=`pwd`
           coverage run  demo_app/manage.py test --noinput --settings=demo_app.settings_test django_zendesk
       - name: "Upload Coverage Results for PY:${{ matrix.python-version }} DB:${{ matrix.db}} DJ:${{ matrix.django-version }}"
         uses: actions/upload-artifact@v2
