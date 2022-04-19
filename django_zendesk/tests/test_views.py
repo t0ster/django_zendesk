@@ -67,7 +67,7 @@ class ViewsTestCase(TestCase):
         self.assertEqual(response["Location"], expected)
 
     @skipIf(
-        settings.DATABASES["default"]["ENGINE"] != "django.db.backends.mysql",
+        settings.DATABASES["default"]["ENGINE"] == "django.db.backends.mysql",
         "Only can be run on SQLite Engine - it works on MySQL in practice but not in tests",
     )
     def testUtfName(self):
