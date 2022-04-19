@@ -1,4 +1,5 @@
-python-decouple
+django-environ
+mysqlclient
 mock
 flake8
 tox
