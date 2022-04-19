@@ -166,7 +166,7 @@ jobs:
           pip uninstall -y Django
           pip install Django${{ matrix.django-version }}
 
-      - name: Run Django Tests
+      - name: Run ${{ matrix.db }} Django ${{ matrix.django-version }} Tests
         env:
           PYTHONWARNINGS: once::DeprecationWarning
           TASK_ALWAYS_EAGER: 1
@@ -219,7 +219,7 @@ jobs:
 
   release:
     name: Release
-    if: github.event.schedule != '0 1 * * 5'
+    if: ${{ github.event_name != 'schedule' }}
     runs-on: ubuntu-latest
     needs: ['cancel', 'outdated', 'black', 'pre-commit', 'security', 'tests', 'coverage']
     outputs:
