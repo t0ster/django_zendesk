@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
+from unittest import skipIf
 
 from ..views import authorize
 
@@ -36,7 +37,7 @@ class ViewsTestCase(TestCase):
     def testNormalAuthentiction(self):
         """Test the regular case."""
 
-        u = User.objects.create_user("alice", "alice@example.com", password="secret")
+        u = User.objects.create_user("alice", "alice@example.com", password="secret", id=9999)
         u.first_name = "Alice"
         u.last_name = "Smith"
         u.save()
@@ -46,14 +47,14 @@ class ViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 302)
         expected = (
             "http://example.com/access/remoteauth/?name=Alice%20Smith&email=alice%40"
-            "example.com&timestamp=100&hash=abb4ce936a84c33c48861e990775217f&external_id=1"
+            "example.com&timestamp=100&hash=4e664407c589a777c397e162adac48a6&external_id=9999"
         )
         self.assertEqual(response["Location"], expected)
 
     def testAnonymous(self):
         """Test a login with no name."""
 
-        u = User.objects.create_user("anon", "anona@example.com", password="secret")
+        u = User.objects.create_user("anon", "anona@example.com", password="secret", id=8888)
         u.save()
 
         self.client.login(username="anon", password="secret")
@@ -61,14 +62,14 @@ class ViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 302)
         expected = (
             "http://example.com/access/remoteauth/?name=&email=anona%40"
-            "example.com&timestamp=100&hash=0b815f8c6a207403edc6c981310146c1&external_id=1"
+            "example.com&timestamp=100&hash=e05da187b803cd1a1e282ad443c47198&external_id=8888"
         )
         self.assertEqual(response["Location"], expected)
 
     def testUtfName(self):
         """Test a login with UTF characters in the name. This requires special URL encoding."""
 
-        u = User.objects.create_user("nikos", "kazantzakis@example.com", password="secret")
+        u = User.objects.create_user("nikos", "kazantzakis@example.com", password="secret", id=7777)
         u.first_name = "Δεν ελπίζω τίποτε."
         u.last_name = "Δεν φοβούμαι τίποτε."
         u.save()
@@ -81,6 +82,6 @@ class ViewsTestCase(TestCase):
             "%CF%80%CE%AF%CE%B6%CF%89%20%CF%84%CE%AF%CF%80%CE%BF%CF%84%CE%B5.%20%CE%94%CE"
             "%B5%CE%BD%20%CF%86%CE%BF%CE%B2%CE%BF%CF%8D%CE%BC%CE%B1%CE%B9%20%CF%84%CE%AF"
             "%CF%80%CE%BF%CF%84%CE%B5.&email=kazantzakis%40example.com&timestamp=100&"
-            "hash=53950f38cf8508e70ba857bb73de1d07&external_id=1"
+            "hash=c5db7d74fd2e1468cbc4f6878f16e752&external_id=7777"
         )
         self.assertEqual(response["Location"], expected)
