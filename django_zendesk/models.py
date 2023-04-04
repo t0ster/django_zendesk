@@ -26,7 +26,6 @@ class Zendesk(object):
         self.base_url = "https://{subdomain}.zendesk.com/api/v2/".format(subdomain=self.subdomain)
 
     def create_ticket(self, subject, user, comment=None):
-
         if not (hasattr(user, "email") and user.email):
             raise TypeError("Expect user to be a User object")
 
@@ -54,7 +53,6 @@ class Zendesk(object):
             raise IOError(message, response.status_code, data)
 
     def add_admin_comment(self, ticket_id, comment, public=True):
-
         data = {"ticket": {"comment": {"body": comment, "public": public}}}
 
         url = self.base_url + "tickets/{id}.json".format(id=ticket_id)
