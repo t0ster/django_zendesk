@@ -47,7 +47,6 @@ See initial idea/blog post [here][intial_idea] and [here][idea2]
 3.  Build the release `rm -rf dist build *egg-info; python setup.py sdist bdist_wheel`
 4.  Upload the data `twine upload dist/*`
 
-
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/rh0dium)
 
 [remote_auth]: http://www.zendesk.com/api/remote_authentication
